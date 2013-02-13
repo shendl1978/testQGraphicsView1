@@ -6,8 +6,8 @@ SOURCES += \
     fivechess.cpp \
     fivechesselement.cpp \
     fiveChessType.cpp \
-    fivechesswidget.cpp \
-    startdialog.cpp
+    startdialog.cpp \
+    fivechessform.cpp
 
 HEADERS += \
     goelement.h \
@@ -15,11 +15,12 @@ HEADERS += \
     fivechess.h \
     fivechesselement.h \
     fiveChessType.h \
-    fivechesswidget.h \
-    startdialog.h
+    startdialog.h \
+    fivechessform.h
 
 FORMS += \
-    startdialog.ui
+    startdialog.ui \
+    fivechessform.ui
 
 RESOURCES += \
     icons/icons.qrc

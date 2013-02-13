@@ -7,12 +7,13 @@
 #include <goelement.h>
 #include <chessmapitem.h>
 #include <math.h>
-#include "fivechesswidget.h"
+//#include "fivechesswidget.h"
+#include "fivechessform.h"
 #include "startdialog.h"
 int main(int argc, char **argv)
  {
      QApplication app(argc, argv);
-
+ /*
       FiveChessWidget *fiveChessWidget=new FiveChessWidget();
 
 
@@ -29,12 +30,19 @@ int main(int argc, char **argv)
      view->setBackgroundBrush(QColor(230, 200, 167));
      //view.setWindowTitle("Drag and Drop Robot");
      view->hide();
+     */
      StartDialog *startDialog=new StartDialog();
+     /*
      startDialog->setFiveChessView(view);
      fiveChessWidget->setStartDialog(startDialog);
      fiveChessWidget->setView(view);
-      startDialog->show();
+      */
 
+      FiveChessForm *fiveChessForm=new FiveChessForm();
+    fiveChessForm->setStartDialog(startDialog);
+    fiveChessForm->hide();
+    startDialog->setFiveChessForm(fiveChessForm);
+     startDialog->show();
 
      return app.exec();
  }

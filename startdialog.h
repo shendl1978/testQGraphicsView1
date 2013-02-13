@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QGraphicsView>
+//#include "fivechessform.h"
 namespace Ui {
 class StartDialog;
 }
@@ -14,13 +15,16 @@ class StartDialog : public QDialog
 public:
     explicit StartDialog(QWidget *parent = 0);
     ~StartDialog();
-   QGraphicsView * getFiveChessView(void) const;
-   void setFiveChessView(QGraphicsView *fiveChessView);
+   //QGraphicsView * getFiveChessView(void) const;
+  // void setFiveChessView(QGraphicsView *fiveChessView);
+    QWidget *getFiveChessForm(void) const;
+     void setFiveChessForm(QWidget *fiveChessForm) ;
    bool isGameRunning(void) const;
    void setGameRunning(bool gameRunning) ;
 private:
     Ui::StartDialog *ui;
-      QGraphicsView *fiveChessView;
+    QWidget *fiveChessForm;
+     // QGraphicsView *fiveChessView;
 signals:
 
 public    slots:

@@ -26,13 +26,6 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
-       <widget class="QPushButton" name="forwardButton">
-        <property name="text">
-         <string>前进</string>
-        </property>
-       </widget>
-      </item>
-      <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
        <widget class="QPushButton" name="returnBtn">
         <property name="text">
          <string>返回</string>
