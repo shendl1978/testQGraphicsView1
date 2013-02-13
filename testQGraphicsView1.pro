@@ -20,3 +20,9 @@ HEADERS += \
 
 FORMS += \
     startdialog.ui
+
+RESOURCES += \
+    icons/icons.qrc
+
+OTHER_FILES += \
+    icons/download_manager.ico
