@@ -12,6 +12,7 @@ StartDialog::StartDialog(QWidget *parent) :
     ui(new Ui::StartDialog)
 {
     ui->setupUi(this);
+    this->setLayout(this->ui->verticalLayout);
 
 }
 
