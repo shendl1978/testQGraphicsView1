@@ -6,11 +6,11 @@
 #include <chessmapitem.h>
 #include <QPalette>
 #include <math.h>
-#include "fivechesswidget.h"
-#include "startdialog.h"
+
+#include "fivechess.h"
 
 StartDialog::StartDialog(QWidget *parent) :
-    QDialog(parent),gameRunning(false),
+    QDialog(parent),fiveChess(FiveChess::getInstance()),
     ui(new Ui::StartDialog)
 {
     ui->setupUi(this);
@@ -20,21 +20,16 @@ StartDialog::StartDialog(QWidget *parent) :
     QPalette  palette;
     palette.setColor(this->backgroundRole(), QColor(230, 200, 167));
     this->setPalette(palette);
+    this->ui->returnBtn->setEnabled(this->fiveChess->isGameRunning());
 
 }
 
 StartDialog::~StartDialog()
 {
     delete ui;
+    delete this->fiveChess;
 }
-/*
-QGraphicsView * StartDialog::getFiveChessView(void) const{
-    return this->fiveChessView;
-}
-void StartDialog::setFiveChessView(QGraphicsView *fiveChessView){
-    this->fiveChessView=fiveChessView;
-}
-*/
+
  QWidget *StartDialog::getFiveChessForm(void) const{
      return this->fiveChessForm;
 
@@ -43,35 +38,47 @@ void StartDialog::setFiveChessView(QGraphicsView *fiveChessView){
 
      this->fiveChessForm=fiveChessForm;
  }
+void StartDialog::paintEvent(QPaintEvent * event){
+    this->ui->returnBtn->setEnabled(this->fiveChess->isGameRunning());
+    QWidget::paintEvent(event);
 
+}
 //play with robot
 void StartDialog::on_singleGame_clicked()
 {
     this->hide();
     this->getFiveChessForm()->show();
-    this->setGameRunning(true);
-    this->ui->returnBtn->setEnabled(true);
+
+    this->fiveChess->setGameRunning(true);
+    this->fiveChess->setEnemyType(FiveChessEnemyType_Robot);
 }
 
 void StartDialog::on_twoBtn_clicked()
 {
     this->hide();
     this->getFiveChessForm()->show();
-    this->setGameRunning(true);
-    this->ui->returnBtn->setEnabled(true);
+    this->fiveChess->setGameRunning(true);
+    this->fiveChess->setEnemyType(FiveChessEnemyType_LocalUser);
+
+
 }
 
 void StartDialog::on_returnBtn_clicked()
 {
-    if(this->isGameRunning()){
+
         this->hide();
         this->getFiveChessForm()->show();
-    }
+
 
 }
-bool StartDialog::isGameRunning(void) const{
-    return this->gameRunning;
+
+
+void StartDialog::on_onlineButton_clicked()
+{
+    this->fiveChess->setEnemyType(FiveChessEnemyType_RemoteUser);
 }
-void StartDialog::setGameRunning(bool gameRunning){
-    this->gameRunning=gameRunning;
+
+void StartDialog::on_helpButton_clicked()
+{
+
 }

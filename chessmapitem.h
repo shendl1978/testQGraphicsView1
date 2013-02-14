@@ -16,25 +16,23 @@ public:
     ChessMapItem();
     ChessMapItem(class FiveChess *fiveChess);
     virtual ~ChessMapItem();
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
+    virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     //reset to init state
-    void reset(void);
-    int getEnemyType(void);
-    void setEnemyType(int enemyType);
+    virtual void reset(void);
+    virtual  int getEnemyType(void) const;
+    virtual void setEnemyType(int enemyType);
     GoElement *chessViewArray[MAX_HORIZONTAL][MAX_VERTICAL];
     class FiveChess *fiveChess;
 protected:
-    void mousePressEvent(QGraphicsSceneMouseEvent *event);
-    void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
-    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
+    virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+    virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 private:
     ////////////////
-    void init(void);
-    bool range(int x,int y,int &xIndex,int &yIndex);
+      void init(void);
+      bool range(int x,int y,int &xIndex,int &yIndex);
 
-    int step;
-    //0  robot. 1  user
-    int enemyType;
+   \
     /////////////
 
 

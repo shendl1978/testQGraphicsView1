@@ -47,10 +47,10 @@ QGraphicsScene *FiveChessForm::getScene(void) const{
 void FiveChessForm::setScene( QGraphicsScene *scene){
     this->scene=scene;
 }
-StartDialog *FiveChessForm::getStartDialog(void) const{
+QDialog *FiveChessForm::getStartDialog(void) const{
     return this->startDialog;
 }
-void FiveChessForm::setStartDialog( StartDialog *startDialog){
+void FiveChessForm::setStartDialog( QDialog *startDialog){
     this->startDialog=startDialog;
 }
 

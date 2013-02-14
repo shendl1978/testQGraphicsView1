@@ -1,7 +1,23 @@
 #include "fivechess.h"
 #include <stdio.h>
 #include <stdlib.h>
-FiveChess::FiveChess():  currentIndex(0)
+#include "fiveChessType.h"
+FiveChess *FiveChess::instance=NULL;
+FiveChess *FiveChess::getInstance(void){
+    if(FiveChess::instance==NULL){
+        FiveChess::instance=new FiveChess();
+
+    }
+    return FiveChess::instance;
+}
+FiveChess::FiveChess(void):
+    xSize(FiveChess_XSize),
+    ySize(FiveChess_YSize),
+    elementSize(FiveChess_ElementSize),
+    currentIndex(0),
+     gameRunning(false),
+     step(0),
+     enemyType(FiveChessEnemyType_Robot)
 {
     for(int i=0;i<CMDS_LENGTH;i++){
 
@@ -13,12 +29,15 @@ FiveChess::FiveChess( int xSize,int ySize,int elementSize):
     xSize(xSize),
     ySize(ySize),
     elementSize(elementSize),
-    currentIndex(0)
+    currentIndex(0),
+    gameRunning(false),
+    step(0),
+    enemyType(FiveChessEnemyType_Robot)
 {
     //this->grid=(enum FiveChessType **)malloc(sizeof(enum FiveChessType)*xSize*ySize);
     for(int i=0;i<xSize;i++){
         for(int j=0;j<ySize;j++){
-            this->grid[i][j]=FiveChessTypeNone;
+            this->grid[i][j]=FiveChessType_None;
         }
     }
     for(int i=0;i<CMDS_LENGTH;i++){
@@ -30,25 +49,25 @@ FiveChess::FiveChess( int xSize,int ySize,int elementSize):
 FiveChess::~FiveChess()
 {
 }
-int FiveChess::getXSize(){
+int FiveChess::getXSize() const{
     return this->xSize;
 }
 void FiveChess::setXSize(int xSize){
     this->xSize=xSize;
 }
-int FiveChess::getYSize(){
+int FiveChess::getYSize() const{
     return this->ySize;
 }
 void FiveChess::setYSize(int ySize){
     this->ySize=ySize;
 }
-int FiveChess::getElementSize(void){
+int FiveChess::getElementSize(void) const{
     return this->elementSize;
 }
 void FiveChess::setElementSize(int elementSize){
     this->elementSize=elementSize;
 }
-int FiveChess::getCurrentIndex(){
+int FiveChess::getCurrentIndex() const{
     return this->currentIndex;
 }
 bool FiveChess::pushCmd(  FiveChessElement *cmd){
@@ -68,7 +87,7 @@ FiveChessElement * FiveChess::popCmd(void){
     if(this->currentIndex>0){
 
         FiveChessElement * cmd= this->cmds[--this->currentIndex];
-        this->grid[cmd->getX()][cmd->getY()]=FiveChessTypeNone;
+        this->grid[cmd->getX()][cmd->getY()]=FiveChessType_None;
         return cmd;
     }else{
         return NULL;
@@ -82,15 +101,38 @@ void FiveChess::reset(void){
     }
     this->currentIndex=0;
 }
+bool FiveChess::isGameRunning(void) const{
+
+    return this->gameRunning;
+}
+void FiveChess::setGameRunning(bool gameRunning){
+
+    this->gameRunning=gameRunning;
+}
+int FiveChess::getStep(void) const{
+    return this->step;
+}
+int FiveChess::incrementStep(void){
+    return ++(this->step);
+}
+void FiveChess::setStep(int step){
+    this->step=step;
+}
+enum FiveChessEnemyType FiveChess::getEnemyType(void) const{
+    return this->enemyType;
+}
+void FiveChess::setEnemyType(enum FiveChessEnemyType enemyType){
+    this->enemyType=enemyType;
+}
 //TODO：
 enum FiveChessType FiveChess::winner(void){
-    enum FiveChessType returnType=FiveChessTypeNone;
+    enum FiveChessType returnType=FiveChessType_None;
     //垂直
     for(int i=0;i<xSize;i++){
         for(int j=0;j<ySize-4;j++){
             enum FiveChessType entry0=this->grid[i][j];
 
-            if(entry0!=FiveChessTypeNone){
+            if(entry0!=FiveChessType_None){
                 if(entry0==this->grid[i][j+1] && entry0==this->grid[i][j+2] && entry0==this->grid[i][j+3] && entry0==this->grid[i][j+4]){
                     return entry0;
                 }
@@ -102,7 +144,7 @@ enum FiveChessType FiveChess::winner(void){
         for(int i=0;i<xSize-4;i++){
             enum FiveChessType entry0=this->grid[i][j];
 
-            if(entry0!=FiveChessTypeNone){
+            if(entry0!=FiveChessType_None){
                 if(entry0==this->grid[i+1][j] && entry0==this->grid[i+2][j] && entry0==this->grid[i+3][j] && entry0==this->grid[i+4][j]){
                     return entry0;
                 }
@@ -115,7 +157,7 @@ enum FiveChessType FiveChess::winner(void){
     for(int j=4;j<ySize;j++){
         for(int i=0;i<xSize-4;i++){
             enum FiveChessType entry0=this->grid[i][j];
-            if(entry0!=FiveChessTypeNone){
+            if(entry0!=FiveChessType_None){
                 if(entry0==this->grid[i+1][j-1] && entry0==this->grid[i+2][j-2] && entry0==this->grid[i+3][j-3] && entry0==this->grid[i+4][j-4]){
                     return entry0;
                 }
@@ -131,7 +173,7 @@ enum FiveChessType FiveChess::winner(void){
     for(int j=0;j<ySize-4;j++){
         for(int i=0;i<xSize-4;i++){
             enum FiveChessType entry0=this->grid[i][j];
-            if(entry0!=FiveChessTypeNone){
+            if(entry0!=FiveChessType_None){
                 if(entry0==this->grid[i+1][j+1] && entry0==this->grid[i+2][j+2] && entry0==this->grid[i+3][j+3] && entry0==this->grid[i+4][j+4]){
                     return entry0;
                 }
@@ -154,11 +196,11 @@ void FiveChess::recommendSteps(enum FiveChessType selfType,FiveChessElement **le
     */
 
     /////////////////////////
-    enum FiveChessType enemyType=FiveChessTypeNone;
-    if(selfType==FiveChessTypeBlack){
-        enemyType=FiveChessTypeWhite;
+    enum FiveChessType enemyType=FiveChessType_None;
+    if(selfType==FiveChessType_Black){
+        enemyType=FiveChessType_White;
     }else{
-        enemyType=FiveChessTypeBlack;
+        enemyType=FiveChessType_Black;
     }
 
 
@@ -170,11 +212,11 @@ void FiveChess::recommendSteps(enum FiveChessType selfType,FiveChessElement **le
                 if(enemyType==this->grid[i][j] &&enemyType==this->grid[i][j+1] && enemyType==this->grid[i][j+2] && enemyType==this->grid[i][j+3]
                        ){
                     bool testFlag=false;
-                    if(j+4<ySize &&this->grid[i][j+4]==FiveChessTypeNone){
+                    if(j+4<ySize &&this->grid[i][j+4]==FiveChessType_None){
                         *right=new FiveChessElement(i,j+4,this->grid[i][j+4]);
                        testFlag=true;
                     }
-                    if(j-1>=0 &&this->grid[i][j-1]==FiveChessTypeNone){
+                    if(j-1>=0 &&this->grid[i][j-1]==FiveChessType_None){
                         *left=new FiveChessElement(i,j-1,this->grid[i][j-1]);
                         testFlag=true;
                     }
@@ -195,11 +237,11 @@ void FiveChess::recommendSteps(enum FiveChessType selfType,FiveChessElement **le
             if(enemyType==this->grid[i][j] &&enemyType==this->grid[i+1][j] && enemyType==this->grid[i+2][j] && enemyType==this->grid[i+3][j]
                    ){
                 bool testFlag=false;
-                if(i+4<xSize &&this->grid[i+4][j]==FiveChessTypeNone){
+                if(i+4<xSize &&this->grid[i+4][j]==FiveChessType_None){
                     *right=new FiveChessElement(i+4,j,this->grid[i+4][j]);
                    testFlag=true;
                 }
-                if(i-1>=0 &&this->grid[i-1][j]==FiveChessTypeNone){
+                if(i-1>=0 &&this->grid[i-1][j]==FiveChessType_None){
                     *left=new FiveChessElement(i-1,j,this->grid[i-1][j]);
                     testFlag=true;
                 }
@@ -220,11 +262,11 @@ void FiveChess::recommendSteps(enum FiveChessType selfType,FiveChessElement **le
             if(enemyType==this->grid[i][j] &&enemyType==this->grid[i+1][j-1] && enemyType==this->grid[i+2][j-2] && enemyType==this->grid[i+3][j-3]
                    ){
                 bool testFlag=false;
-                if(i+4<xSize && j-4>=0 &&this->grid[i+4][j-4]==FiveChessTypeNone){
+                if(i+4<xSize && j-4>=0 &&this->grid[i+4][j-4]==FiveChessType_None){
                     *right=new FiveChessElement(i+4,j-4,this->grid[i+4][j-4]);
                    testFlag=true;
                 }
-                if(i-1>=0 && j+1<ySize &&this->grid[i-1][j+1]==FiveChessTypeNone){
+                if(i-1>=0 && j+1<ySize &&this->grid[i-1][j+1]==FiveChessType_None){
                     *left=new FiveChessElement(i-1,j+1,this->grid[i-1][j+1]);
                     testFlag=true;
                 }
@@ -251,11 +293,11 @@ void FiveChess::recommendSteps(enum FiveChessType selfType,FiveChessElement **le
             if(enemyType==this->grid[i][j] &&enemyType==this->grid[i+1][j+1] && enemyType==this->grid[i+2][j+2] && enemyType==this->grid[i+3][j+3]
                    ){
                 bool testFlag=false;
-                if(i+4<xSize && j+4<ySize &&this->grid[i+4][j+4]==FiveChessTypeNone){
+                if(i+4<xSize && j+4<ySize &&this->grid[i+4][j+4]==FiveChessType_None){
                     *right=new FiveChessElement(i+4,j+4,this->grid[i+4][j+4]);
                    testFlag=true;
                 }
-                if(i-1>=0 && j-1>=0 &&this->grid[i-1][j-1]==FiveChessTypeNone){
+                if(i-1>=0 && j-1>=0 &&this->grid[i-1][j-1]==FiveChessType_None){
                     *left=new FiveChessElement(i-1,j-1,this->grid[i-1][j-1]);
                     testFlag=true;
                 }
@@ -277,11 +319,11 @@ void FiveChess::recommendSteps(enum FiveChessType selfType,FiveChessElement **le
                 if(selfType==this->grid[i][j] &&selfType==this->grid[i][j+1] && selfType==this->grid[i][j+2] && selfType==this->grid[i][j+3]
                        ){
                     bool testFlag=false;
-                    if(j+4<ySize &&this->grid[i][j+4]==FiveChessTypeNone){
+                    if(j+4<ySize &&this->grid[i][j+4]==FiveChessType_None){
                         *right=new FiveChessElement(i,j+4,this->grid[i][j+4]);
                        testFlag=true;
                     }
-                    if(j-1>=0 &&this->grid[i][j-1]==FiveChessTypeNone){
+                    if(j-1>=0 &&this->grid[i][j-1]==FiveChessType_None){
                         *left=new FiveChessElement(i,j-1,this->grid[i][j-1]);
                         testFlag=true;
                     }
@@ -302,11 +344,11 @@ void FiveChess::recommendSteps(enum FiveChessType selfType,FiveChessElement **le
             if(selfType==this->grid[i][j] &&selfType==this->grid[i+1][j] && selfType==this->grid[i+2][j] && selfType==this->grid[i+3][j]
                    ){
                 bool testFlag=false;
-                if(i+4<xSize &&this->grid[i+4][j]==FiveChessTypeNone){
+                if(i+4<xSize &&this->grid[i+4][j]==FiveChessType_None){
                     *right=new FiveChessElement(i+4,j,this->grid[i+4][j]);
                    testFlag=true;
                 }
-                if(i-1>=0 &&this->grid[i-1][j]==FiveChessTypeNone){
+                if(i-1>=0 &&this->grid[i-1][j]==FiveChessType_None){
                     *left=new FiveChessElement(i-1,j,this->grid[i-1][j]);
                     testFlag=true;
                 }
@@ -327,11 +369,11 @@ void FiveChess::recommendSteps(enum FiveChessType selfType,FiveChessElement **le
             if(selfType==this->grid[i][j] &&selfType==this->grid[i+1][j-1] && selfType==this->grid[i+2][j-2] && selfType==this->grid[i+3][j-3]
                    ){
                 bool testFlag=false;
-                if(i+4<xSize && j-4>=0 &&this->grid[i+4][j-4]==FiveChessTypeNone){
+                if(i+4<xSize && j-4>=0 &&this->grid[i+4][j-4]==FiveChessType_None){
                     *right=new FiveChessElement(i+4,j-4,this->grid[i+4][j-4]);
                    testFlag=true;
                 }
-                if(i-1>=0 && j+1<ySize &&this->grid[i-1][j+1]==FiveChessTypeNone){
+                if(i-1>=0 && j+1<ySize &&this->grid[i-1][j+1]==FiveChessType_None){
                     *left=new FiveChessElement(i-1,j+1,this->grid[i-1][j+1]);
                     testFlag=true;
                 }
@@ -358,11 +400,11 @@ void FiveChess::recommendSteps(enum FiveChessType selfType,FiveChessElement **le
             if(selfType==this->grid[i][j] &&selfType==this->grid[i+1][j+1] && selfType==this->grid[i+2][j+2] && selfType==this->grid[i+3][j+3]
                    ){
                 bool testFlag=false;
-                if(i+4<xSize && j+4<ySize &&this->grid[i+4][j+4]==FiveChessTypeNone){
+                if(i+4<xSize && j+4<ySize &&this->grid[i+4][j+4]==FiveChessType_None){
                     *right=new FiveChessElement(i+4,j+4,this->grid[i+4][j+4]);
                    testFlag=true;
                 }
-                if(i-1>=0 && j-1>=0 &&this->grid[i-1][j-1]==FiveChessTypeNone){
+                if(i-1>=0 && j-1>=0 &&this->grid[i-1][j-1]==FiveChessType_None){
                     *left=new FiveChessElement(i-1,j-1,this->grid[i-1][j-1]);
                     testFlag=true;
                 }
@@ -402,7 +444,7 @@ bool FiveChess::setChess(int xPos,int yPos,FiveChessType type){
     if(xPos<0 ||xPos >=this->xSize ||yPos<0 ||yPos >=this->ySize ){
         return false;
     }
-    if(this->grid[xPos][yPos]==FiveChessTypeNone){
+    if(this->grid[xPos][yPos]==FiveChessType_None){
         this->grid[xPos][yPos]=type;
     }
     return true;

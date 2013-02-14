@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QGraphicsView>
-//#include "fivechessform.h"
+#include "fivechess.h"
 namespace Ui {
 class StartDialog;
 }
@@ -19,8 +19,8 @@ public:
   // void setFiveChessView(QGraphicsView *fiveChessView);
     QWidget *getFiveChessForm(void) const;
      void setFiveChessForm(QWidget *fiveChessForm) ;
-   bool isGameRunning(void) const;
-   void setGameRunning(bool gameRunning) ;
+protected:
+     virtual void paintEvent(QPaintEvent * event);
 private:
     Ui::StartDialog *ui;
     QWidget *fiveChessForm;
@@ -35,8 +35,13 @@ private slots:
     void on_singleGame_clicked();
     void on_twoBtn_clicked();
     void on_returnBtn_clicked();
+    void on_onlineButton_clicked();
+
+    void on_helpButton_clicked();
+
 private:
-    bool gameRunning;
+
+    FiveChess *fiveChess;
 };
 
 #endif // STARTDIALOG_H

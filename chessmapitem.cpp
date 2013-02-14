@@ -33,12 +33,12 @@ void ChessMapItem::init(void){
 
 }
 
-ChessMapItem::ChessMapItem():step(0),enemyType(0)
+ChessMapItem::ChessMapItem()
 {
-    this->fiveChess=new class FiveChess(19,19,20);
+    this->fiveChess=FiveChess::getInstance();//new class FiveChess(19,19,20);
     this->init();
 }
-ChessMapItem::ChessMapItem(class FiveChess *fiveChess):step(0),enemyType(0){
+ChessMapItem::ChessMapItem(class FiveChess *fiveChess){
     this->fiveChess=fiveChess;
     this->init();
 }
@@ -143,19 +143,19 @@ void ChessMapItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     QColor color;
     QColor nextColor;
     FiveChessElement *fiveChessElement=NULL;
-    enum FiveChessType fiveChessType=FiveChessTypeNone;
-    enum FiveChessType nextFiveChessType=FiveChessTypeNone;
-    if(this->step%2==0){
+    enum FiveChessType fiveChessType=FiveChessType_None;
+    enum FiveChessType nextFiveChessType=FiveChessType_None;
+    if(this->fiveChess->getStep()%2==0){
         color=Qt::black;
         nextColor=Qt::white;
-        fiveChessType=FiveChessTypeBlack;
-        nextFiveChessType=FiveChessTypeWhite;
+        fiveChessType=FiveChessType_Black;
+        nextFiveChessType=FiveChessType_White;
         fiveChessElement=new FiveChessElement(indexX,indexY,fiveChessType);
     }else{
         color=Qt::white;
         nextColor=Qt::black;
-        fiveChessType=FiveChessTypeWhite;
-        nextFiveChessType=FiveChessTypeBlack;
+        fiveChessType=FiveChessType_White;
+        nextFiveChessType=FiveChessType_Black;
         fiveChessElement=new FiveChessElement(indexX,indexY,fiveChessType);
     }
     GoElement *goElement=new GoElement((indexX)*this->fiveChess->getElementSize()-this->fiveChess->getElementSize()/2,
@@ -166,9 +166,9 @@ void ChessMapItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     this->chessViewArray[indexX][indexY]=goElement;
 
     this->fiveChess->pushCmd(fiveChessElement);
-    this->step++;
+    this->fiveChess->incrementStep();
     enum FiveChessType winner=this->fiveChess->winner();
-    if(winner!=FiveChessTypeNone){
+    if(winner!=FiveChessType_None){
         QMessageBox msgBox;
         QString str("");
         str.append(g_FiveChessTypeCStr[winner]);
@@ -205,9 +205,9 @@ void ChessMapItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
             this->chessViewArray[nextFiveChessElement->getX()][nextFiveChessElement->getY()]=nextElement;
 
             this->fiveChess->pushCmd(nextFiveChessElement);
-            this->step++;
+           this->fiveChess->incrementStep();
             enum FiveChessType winner=this->fiveChess->winner();
-            if(winner!=FiveChessTypeNone){
+            if(winner!=FiveChessType_None){
                 QMessageBox msgBox;
                 QString str("");
                 str.append(g_FiveChessTypeCStr[winner]);
@@ -251,12 +251,7 @@ void ChessMapItem::reset(void){
         }
 
     }
-    this->step=0;
+    this->fiveChess->setStep(0);
 
 }
-int ChessMapItem::getEnemyType(void){
-    return this->enemyType;
-}
-void ChessMapItem::setEnemyType(int enemyType){
-    this->enemyType=enemyType;
-}
+

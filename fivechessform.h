@@ -2,10 +2,12 @@
 #define FIVECHESSFORM_H
 
 #include <QWidget>
+#include <QDialog>
 #include <QGraphicsScene>
 ///////
 #include "chessmapitem.h"
-#include "startdialog.h"
+//#include "startdialog.h"
+#include "fivechess.h"
 namespace Ui {
 class FiveChessForm;
 }
@@ -22,8 +24,8 @@ public:
     virtual void setChessMapItem(ChessMapItem *chessMapItem);
     virtual QGraphicsScene *getScene(void) const;
     virtual void setScene( QGraphicsScene *scene) ;
-    virtual StartDialog *getStartDialog(void) const;
-    virtual void setStartDialog( StartDialog *startDialog) ;
+    virtual QDialog *getStartDialog(void) const;
+    virtual void setStartDialog( QDialog *startDialog) ;
 
 private slots:
     void on_backButton_clicked();
@@ -43,7 +45,7 @@ private:
     QGraphicsScene *scene;
     ChessMapItem *chessMapItem;
 
-     StartDialog *startDialog;
+     QDialog *startDialog;
 };
 
 #endif // FIVECHESSFORM_H
