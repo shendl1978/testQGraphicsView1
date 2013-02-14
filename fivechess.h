@@ -29,9 +29,22 @@ public:
     virtual void reset(void);
     virtual bool isGameRunning(void) const;
     virtual  void setGameRunning(bool gameRunning);
-    virtual int getStep(void) const;
-    virtual void setStep(int step);
-    virtual int incrementStep(void);
+    //virtual int getStep(void) const;
+   // virtual void setStep(int step);
+   // virtual int incrementStep(void);
+    virtual int getBlackWinRecord(void) const;
+    virtual void  setBlackWinRecord(int blackWinRecord);
+
+    virtual int getBlackLoseRecord(void) const;
+    virtual void  setBlackLoseRecord(int blackLoseRecord);
+
+    virtual int getWhiteWinRecord(void) const;
+     virtual void setWhiteWinRecord(int whiteWinRecord);
+
+    virtual int getWhiteLoseRecord(void) const;
+    virtual void setWhiteLoseRecord(int whiteLoseRecord);
+    ///////
+    virtual bool recordWin(enum FiveChessType winType,int &blackWinRecord,int &blackLoseRecord,int &whiteWinRecord,int &whiteLoseRecord);
     virtual enum FiveChessEnemyType getEnemyType(void) const;
     virtual void setEnemyType(enum FiveChessEnemyType enemyType);
 private:
@@ -43,9 +56,13 @@ private:
     int currentIndex;
     FiveChessElement *cmds[CMDS_LENGTH];
     bool gameRunning;
-    int step;
+   // int step;
     //0  robot. 1  user
     enum FiveChessEnemyType  enemyType;
+    int blackWinRecord;
+    int blackLoseRecord;
+    int whiteWinRecord;
+    int whiteLoseRecord;
 
 };
 

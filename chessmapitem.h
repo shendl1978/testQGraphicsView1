@@ -9,20 +9,22 @@
 #include <QGraphicsSceneMoveEvent>
 #include "fivechess.h"
 #include "goelement.h"
+#include <QWidget>
 class ChessMapItem : public QGraphicsRectItem
 {
     // Q_OBJECT
 public:
     ChessMapItem();
-    ChessMapItem(class FiveChess *fiveChess);
+    ChessMapItem( FiveChess *fiveChess);
     virtual ~ChessMapItem();
     virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     //reset to init state
     virtual void reset(void);
-    virtual  int getEnemyType(void) const;
-    virtual void setEnemyType(int enemyType);
+    virtual QWidget *getFiveChessForm(void) const;
+     virtual void setFiveChessForm(QWidget *fiveChessForm) ;
+    virtual void showGameoverDialog(enum FiveChessType winType);
     GoElement *chessViewArray[MAX_HORIZONTAL][MAX_VERTICAL];
-    class FiveChess *fiveChess;
+    FiveChess *fiveChess;
 protected:
     virtual void mousePressEvent(QGraphicsSceneMouseEvent *event);
     virtual void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
@@ -34,7 +36,7 @@ private:
 
    \
     /////////////
-
+    QWidget *fiveChessForm;
 
 //signals:
 

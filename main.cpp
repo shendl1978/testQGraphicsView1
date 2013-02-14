@@ -3,11 +3,11 @@
 
 #include <QtGui>
 #include <QLabel>
-#include <QApplication>s
+#include <QApplication>
 #include <goelement.h>
 #include <chessmapitem.h>
 #include <math.h>
-//#include "fivechesswidget.h"
+
 #include "fivechessform.h"
 #include "startdialog.h"
 int main(int argc, char **argv)

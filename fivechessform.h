@@ -26,7 +26,8 @@ public:
     virtual void setScene( QGraphicsScene *scene) ;
     virtual QDialog *getStartDialog(void) const;
     virtual void setStartDialog( QDialog *startDialog) ;
-
+protected:
+     virtual void paintEvent(QPaintEvent * event);
 private slots:
     void on_backButton_clicked();
 
@@ -46,6 +47,7 @@ private:
     ChessMapItem *chessMapItem;
 
      QDialog *startDialog;
+     FiveChess *fiveChess;
 };
 
 #endif // FIVECHESSFORM_H

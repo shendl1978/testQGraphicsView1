@@ -34,12 +34,15 @@ void ChessMapItem::init(void){
 }
 
 ChessMapItem::ChessMapItem()
+    :fiveChess(FiveChess::getInstance())
 {
-    this->fiveChess=FiveChess::getInstance();//new class FiveChess(19,19,20);
+    //this->//new class FiveChess(19,19,20);
     this->init();
 }
-ChessMapItem::ChessMapItem(class FiveChess *fiveChess){
-    this->fiveChess=fiveChess;
+ChessMapItem::ChessMapItem(class FiveChess *fiveChess)
+    :fiveChess(fiveChess)
+{
+
     this->init();
 }
 ChessMapItem::~ChessMapItem()
@@ -133,9 +136,11 @@ void ChessMapItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     if(indexX<0 || indexX>=this->fiveChess->getXSize()
             || indexY<0 || indexY>=this->fiveChess->getYSize()
             ){
+        //goto cleanup;
         return;
     }
     if(this->chessViewArray[indexX][indexY]!=NULL){
+       // goto cleanup;
         return;
     }
 
@@ -145,7 +150,7 @@ void ChessMapItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     FiveChessElement *fiveChessElement=NULL;
     enum FiveChessType fiveChessType=FiveChessType_None;
     enum FiveChessType nextFiveChessType=FiveChessType_None;
-    if(this->fiveChess->getStep()%2==0){
+    if(this->fiveChess->getCurrentIndex()%2==0){
         color=Qt::black;
         nextColor=Qt::white;
         fiveChessType=FiveChessType_Black;
@@ -166,22 +171,15 @@ void ChessMapItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
     this->chessViewArray[indexX][indexY]=goElement;
 
     this->fiveChess->pushCmd(fiveChessElement);
-    this->fiveChess->incrementStep();
+
     enum FiveChessType winner=this->fiveChess->winner();
     if(winner!=FiveChessType_None){
-        QMessageBox msgBox;
-        QString str("");
-        str.append(g_FiveChessTypeCStr[winner]);
-        str.append(" win!");
-        msgBox.setText(str);
-        msgBox.exec();//block
-        //user clicked OK button.
-        this->reset();
-        return;
+       this->showGameoverDialog(winner);
+        goto cleanup;
     }
     //this->setCursor(Qt::OpenHandCursor);
     ///////////play with robot
-    if(this->getEnemyType()==0){
+    if(this->fiveChess->getEnemyType()==FiveChessEnemyType_Robot){
         FiveChessElement *left=NULL;FiveChessElement *right=NULL;int length=0;int  type=0;
         FiveChessElement *nextFiveChessElement=NULL;
         this->fiveChess->recommendSteps(nextFiveChessType,&left,&right,length,type);
@@ -195,7 +193,7 @@ void ChessMapItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
             if(this->chessViewArray[nextFiveChessElement->getX()][nextFiveChessElement->getY()]!=NULL){
                 delete left;
                 delete right;
-                return;
+                goto cleanup;
             }
             GoElement *nextElement=new GoElement((nextFiveChessElement->getX())*this->fiveChess->getElementSize()-this->fiveChess->getElementSize()/2,
                                                  (nextFiveChessElement->getY())*this->fiveChess->getElementSize()-this->fiveChess->getElementSize()/2,
@@ -205,22 +203,17 @@ void ChessMapItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
             this->chessViewArray[nextFiveChessElement->getX()][nextFiveChessElement->getY()]=nextElement;
 
             this->fiveChess->pushCmd(nextFiveChessElement);
-           this->fiveChess->incrementStep();
+
             enum FiveChessType winner=this->fiveChess->winner();
             if(winner!=FiveChessType_None){
-                QMessageBox msgBox;
-                QString str("");
-                str.append(g_FiveChessTypeCStr[winner]);
-                str.append(" win!");
-                msgBox.setText(str);
-                msgBox.exec();//block
-                //user clicked OK button.
-                this->reset();
-                return;
+               this->showGameoverDialog(winner);
+                goto cleanup;
             }
         }
 
     }
+    cleanup:
+    this->getFiveChessForm()->update();
 
 }
 void ChessMapItem::restore(void){
@@ -251,7 +244,34 @@ void ChessMapItem::reset(void){
         }
 
     }
-    this->fiveChess->setStep(0);
+
 
 }
+QWidget *ChessMapItem::getFiveChessForm(void) const{
+    return this->fiveChessForm;
 
+}
+void ChessMapItem::setFiveChessForm(QWidget *fiveChessForm) {
+
+    this->fiveChessForm=fiveChessForm;
+}
+ void ChessMapItem::showGameoverDialog(enum FiveChessType winType){
+     if(winType!=FiveChessType_None){
+         QMessageBox msgBox;
+         QString str("");
+         str.append(g_FiveChessTypeCStr[winType]);
+         str.append(" win!");
+         msgBox.setText(str);
+         msgBox.exec();//block
+         //user clicked OK button.
+         this->reset();
+         int  blackWinRecord=0;
+         int  blackLoseRecord=0;
+         int  whiteWinRecord=0;
+         int  whiteLoseRecord=0;
+         this->fiveChess->recordWin(winType,blackWinRecord,blackLoseRecord,whiteWinRecord,whiteLoseRecord);
+
+         this->fiveChessForm->update();
+     }
+
+ }

@@ -6,9 +6,9 @@ FiveChessElement::FiveChessElement()
 FiveChessElement::~FiveChessElement()
 {
 }
-FiveChessElement::FiveChessElement(int x,int y,enum FiveChessType type):
-    x(x),
-    y(y),
+FiveChessElement::FiveChessElement(int newX,int newY,enum FiveChessType type):
+    x(newX),
+    y(newY),
     type(type)
 {
 

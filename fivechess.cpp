@@ -16,8 +16,12 @@ FiveChess::FiveChess(void):
     elementSize(FiveChess_ElementSize),
     currentIndex(0),
      gameRunning(false),
-     step(0),
+
      enemyType(FiveChessEnemyType_Robot)
+   ,blackWinRecord(0)
+   ,blackLoseRecord(0)
+   ,whiteWinRecord(0)
+   ,whiteLoseRecord(0)
 {
     for(int i=0;i<CMDS_LENGTH;i++){
 
@@ -31,8 +35,12 @@ FiveChess::FiveChess( int xSize,int ySize,int elementSize):
     elementSize(elementSize),
     currentIndex(0),
     gameRunning(false),
-    step(0),
+
     enemyType(FiveChessEnemyType_Robot)
+  ,blackWinRecord(0)
+  ,blackLoseRecord(0)
+  ,whiteWinRecord(0)
+  ,whiteLoseRecord(0)
 {
     //this->grid=(enum FiveChessType **)malloc(sizeof(enum FiveChessType)*xSize*ySize);
     for(int i=0;i<xSize;i++){
@@ -109,6 +117,7 @@ void FiveChess::setGameRunning(bool gameRunning){
 
     this->gameRunning=gameRunning;
 }
+/*
 int FiveChess::getStep(void) const{
     return this->step;
 }
@@ -118,6 +127,61 @@ int FiveChess::incrementStep(void){
 void FiveChess::setStep(int step){
     this->step=step;
 }
+*/
+  int FiveChess::getBlackWinRecord(void) const{
+    return this->blackWinRecord;
+}
+  void  FiveChess::setBlackWinRecord(int blackWinRecord){
+    this->blackWinRecord=blackWinRecord;
+}
+
+  int FiveChess::getBlackLoseRecord(void) const{
+    return this->blackLoseRecord;
+}
+  void  FiveChess::setBlackLoseRecord(int blackLoseRecord){
+      this->blackLoseRecord=blackLoseRecord;
+  }
+
+  int FiveChess::getWhiteWinRecord(void) const{
+    return this->whiteWinRecord;
+  }
+   void FiveChess::setWhiteWinRecord(int whiteWinRecord){
+       this->whiteWinRecord=whiteWinRecord;
+   }
+
+  int FiveChess::getWhiteLoseRecord(void) const{
+      return this->whiteLoseRecord;
+  }
+  void FiveChess::setWhiteLoseRecord(int whiteLoseRecord){
+      this->whiteLoseRecord=whiteLoseRecord;
+  }
+
+   bool FiveChess::recordWin(enum FiveChessType winType,int &blackWinRecord,int &blackLoseRecord,int &whiteWinRecord,int &whiteLoseRecord){
+       switch(winType){
+       case FiveChessType_Black:
+           this->blackWinRecord++;
+           this->whiteLoseRecord++;
+           break;
+       case FiveChessType_White:
+           this->whiteWinRecord++;
+           this->blackLoseRecord++;
+           break;
+        case FiveChessType_None:
+           //break;
+
+       default:
+           return false;
+           break;
+
+       }
+
+       blackWinRecord=this->blackWinRecord;
+       blackLoseRecord=this->blackLoseRecord;
+       whiteWinRecord=this->whiteWinRecord;
+       whiteLoseRecord=this->whiteLoseRecord;
+       return true;
+   }
+
 enum FiveChessEnemyType FiveChess::getEnemyType(void) const{
     return this->enemyType;
 }
