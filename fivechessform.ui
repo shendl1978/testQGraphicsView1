@@ -18,7 +18,7 @@
     <rect>
      <x>9</x>
      <y>9</y>
-     <width>633</width>
+     <width>749</width>
      <height>281</height>
     </rect>
    </property>
@@ -94,6 +94,13 @@
        <widget class="QPushButton" name="restoreButton">
         <property name="text">
          <string>悔棋</string>
+        </property>
+       </widget>
+      </item>
+      <item alignment="Qt::AlignHCenter|Qt::AlignTop">
+       <widget class="QPushButton" name="saveButton">
+        <property name="text">
+         <string>保存</string>
         </property>
        </widget>
       </item>
