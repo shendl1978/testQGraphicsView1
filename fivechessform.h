@@ -31,7 +31,6 @@ protected:
 private slots:
     void on_backButton_clicked();
 
-    void on_forwardButton_clicked();
 
     void on_helpButton_clicked();
 

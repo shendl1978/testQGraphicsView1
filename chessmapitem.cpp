@@ -259,8 +259,11 @@ void ChessMapItem::setFiveChessForm(QWidget *fiveChessForm) {
      if(winType!=FiveChessType_None){
          QMessageBox msgBox;
          QString str("");
-         str.append(g_FiveChessTypeCStr[winType]);
-         str.append(" win!");
+         if(winType==FiveChessType_Black){
+             str=QString(QObject::tr("black player win!"));
+         }else{
+             str=QString(QObject::tr("white player win!"));
+         }
          msgBox.setText(str);
          msgBox.exec();//block
          //user clicked OK button.

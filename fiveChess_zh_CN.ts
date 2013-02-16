@@ -76,6 +76,19 @@
     </message>
 </context>
 <context>
+    <name>QObject</name>
+    <message>
+        <location filename="chessmapitem.cpp" line="263"/>
+        <source>black player win!</source>
+        <translation>黑方胜利!</translation>
+    </message>
+    <message>
+        <location filename="chessmapitem.cpp" line="265"/>
+        <source>white player win!</source>
+        <translation>白方胜利!</translation>
+    </message>
+</context>
+<context>
     <name>StartDialog</name>
     <message>
         <location filename="startdialog.ui" line="14"/>

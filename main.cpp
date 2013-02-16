@@ -15,9 +15,9 @@ int main(int argc, char **argv)
  {
      QApplication app(argc, argv);
      QTranslator translator;
-          translator.load(":/testQGraphicsView1/fiveChess_zh_CN");//.qm
+     translator.load("fiveChess_"+QLocale::system().name());//,":/testQGraphicsView1");//.qm
           app.installTranslator(&translator);
-
+        //  QTextCodec::setCodecForLocale();
      StartDialog *startDialog=new StartDialog();
 
       FiveChessForm *fiveChessForm=new FiveChessForm();

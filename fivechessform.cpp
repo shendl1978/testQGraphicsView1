@@ -94,10 +94,7 @@ void FiveChessForm::on_backButton_clicked()
     this->getStartDialog()->show();
 }
 
-void FiveChessForm::on_forwardButton_clicked()
-{
 
-}
 
 void FiveChessForm::on_helpButton_clicked()
 {
