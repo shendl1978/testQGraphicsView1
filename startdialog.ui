@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Main Widget</string>
   </property>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
@@ -28,7 +28,7 @@
       <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
        <widget class="QPushButton" name="returnBtn">
         <property name="text">
-         <string>返回</string>
+         <string>return</string>
         </property>
        </widget>
       </item>
@@ -48,7 +48,7 @@
       <item alignment="Qt::AlignRight|Qt::AlignVCenter">
        <widget class="QPushButton" name="helpButton">
         <property name="text">
-         <string>帮助</string>
+         <string>help</string>
         </property>
        </widget>
       </item>
@@ -70,28 +70,28 @@
     <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
      <widget class="QPushButton" name="loadButton">
       <property name="text">
-       <string>载入游戏</string>
+       <string>load saved game</string>
       </property>
      </widget>
     </item>
     <item alignment="Qt::AlignHCenter">
      <widget class="QPushButton" name="singleGame">
       <property name="text">
-       <string>单人游戏</string>
+       <string>single game</string>
       </property>
      </widget>
     </item>
     <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
      <widget class="QPushButton" name="twoBtn">
       <property name="text">
-       <string>双人游戏</string>
+       <string>two players game</string>
       </property>
      </widget>
     </item>
     <item alignment="Qt::AlignHCenter|Qt::AlignVCenter">
      <widget class="QPushButton" name="onlineButton">
       <property name="text">
-       <string>在线游戏</string>
+       <string>online game</string>
       </property>
      </widget>
     </item>

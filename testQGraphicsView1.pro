@@ -27,3 +27,4 @@ RESOURCES += \
 
 OTHER_FILES += \
     icons/download_manager.ico
+TRANSLATIONS = fiveChess_zh_CN.ts

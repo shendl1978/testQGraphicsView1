@@ -15,7 +15,7 @@ FiveChessForm::FiveChessForm(QWidget *parent) :
 
 
     this->setLayout(this->ui->verticalLayout);
-    this->setWindowTitle("五子棋");
+
     QPalette  palette;
     palette.setColor(this->backgroundRole(), QColor(230, 200, 167));
     this->setPalette(palette);
@@ -69,20 +69,16 @@ void FiveChessForm::paintEvent(QPaintEvent * event){
         this->ui->whiteGiveupButton->setEnabled(true);
     }
     ////////show game record
-    QString blackQStr("");
-    blackQStr.append("win ");
-    blackQStr.append(QString::number(this->fiveChess->getBlackWinRecord()));
-    blackQStr.append(" times,lose ");
-    blackQStr.append(QString::number(this->fiveChess->getBlackLoseRecord()));
-     blackQStr.append(" times");
-    this->ui->blackRecordLabel->setText(blackQStr);
-     QString whiteQStr("");
-     whiteQStr.append("win ");
-     whiteQStr.append(QString::number(this->fiveChess->getWhiteWinRecord()));
-     whiteQStr.append(" times,lose ");
-     whiteQStr.append(QString::number(this->fiveChess->getWhiteLoseRecord()));
-      whiteQStr.append(" times");
-     this->ui->whiteRecordLabel->setText(whiteQStr);
+
+
+    this->ui->blackRecordWinLabel->setText(QString::number(this->fiveChess->getBlackWinRecord()));
+    this->ui->blackRecordLoseLabel->setText(QString::number(this->fiveChess->getBlackLoseRecord()));
+
+
+
+
+     this->ui->whiteRecordWinLabel->setText(QString::number(this->fiveChess->getWhiteWinRecord()));
+     this->ui->whiteRecordLoseLabel->setText(QString::number(this->fiveChess->getWhiteLoseRecord()));
       //set enable or disable state of restoreBtn
       if(this->fiveChess->getCurrentIndex()==0){
           this->ui->restoreButton->setEnabled(false);
