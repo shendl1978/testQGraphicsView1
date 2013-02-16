@@ -71,14 +71,17 @@ void FiveChessForm::paintEvent(QPaintEvent * event){
     ////////show game record
 
 
-    this->ui->blackRecordWinLabel->setText(QString::number(this->fiveChess->getBlackWinRecord()));
-    this->ui->blackRecordLoseLabel->setText(QString::number(this->fiveChess->getBlackLoseRecord()));
+   // this->ui->blackRecordLabel->setText(QString::number(this->fiveChess->getBlackWinRecord()));
+   // this->ui->blackRecordLoseLabel->setText(QString::number(this->fiveChess->getBlackLoseRecord()));
+    //win %1 times,lose %2 times
+    this->ui->blackRecordLabel->setText(tr("win %1 times,lose %2 times").arg(QString::number(this->fiveChess->getBlackWinRecord()))
+                                    .arg(QString::number(this->fiveChess->getBlackLoseRecord())));
 
+ this->ui->whiteRecordLabel->setText(tr("win %1 times,lose %2 times").arg(QString::number(this->fiveChess->getWhiteWinRecord()))
+                                     .arg(QString::number(this->fiveChess->getWhiteLoseRecord())));
 
-
-
-     this->ui->whiteRecordWinLabel->setText(QString::number(this->fiveChess->getWhiteWinRecord()));
-     this->ui->whiteRecordLoseLabel->setText(QString::number(this->fiveChess->getWhiteLoseRecord()));
+    // this->ui->whiteRecordWinLabel->setText(QString::number(this->fiveChess->getWhiteWinRecord()));
+    // this->ui->whiteRecordLoseLabel->setText(QString::number(this->fiveChess->getWhiteLoseRecord()));
       //set enable or disable state of restoreBtn
       if(this->fiveChess->getCurrentIndex()==0){
           this->ui->restoreButton->setEnabled(false);

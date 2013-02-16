@@ -25,52 +25,44 @@
     </message>
     <message>
         <location filename="fivechessform.ui" line="69"/>
-        <location filename="fivechessform.ui" line="158"/>
+        <location filename="fivechessform.ui" line="130"/>
+        <source>win %1 times,lose %2 times</source>
+        <translation>胜 %1 次,负 %2 次</translation>
+    </message>
+    <message>
         <source>win</source>
-        <translation>胜</translation>
+        <translation type="obsolete">胜</translation>
     </message>
     <message>
-        <location filename="fivechessform.ui" line="76"/>
-        <location filename="fivechessform.ui" line="90"/>
-        <location filename="fivechessform.ui" line="165"/>
-        <location filename="fivechessform.ui" line="179"/>
-        <source>0</source>
-        <translation></translation>
-    </message>
-    <message>
-        <location filename="fivechessform.ui" line="83"/>
-        <location filename="fivechessform.ui" line="172"/>
         <source>times,lose</source>
-        <translation>次,败</translation>
+        <translation type="obsolete">次,败</translation>
     </message>
     <message>
-        <location filename="fivechessform.ui" line="97"/>
-        <location filename="fivechessform.ui" line="186"/>
         <source>times</source>
-        <translation>次</translation>
+        <translation type="obsolete">次</translation>
     </message>
     <message>
         <source>win 0 times,lose 0 times</source>
         <translation type="obsolete">胜0次,败0次</translation>
     </message>
     <message>
-        <location filename="fivechessform.ui" line="104"/>
-        <location filename="fivechessform.ui" line="193"/>
+        <location filename="fivechessform.ui" line="76"/>
+        <location filename="fivechessform.ui" line="137"/>
         <source>giveup</source>
         <translation>投降</translation>
     </message>
     <message>
-        <location filename="fivechessform.ui" line="124"/>
+        <location filename="fivechessform.ui" line="96"/>
         <source>retrack</source>
         <translation>悔棋</translation>
     </message>
     <message>
-        <location filename="fivechessform.ui" line="131"/>
+        <location filename="fivechessform.ui" line="103"/>
         <source>save game</source>
         <translation>保存游戏</translation>
     </message>
     <message>
-        <location filename="fivechessform.ui" line="151"/>
+        <location filename="fivechessform.ui" line="123"/>
         <source>White player</source>
         <translation>白方</translation>
     </message>
