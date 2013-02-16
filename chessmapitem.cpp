@@ -213,7 +213,7 @@ void ChessMapItem::mouseReleaseEvent(QGraphicsSceneMouseEvent *event)
 
     }
     cleanup:
-    this->getFiveChessForm()->update();
+    this->fiveChess->updateWidgets();
 
 }
 void ChessMapItem::restore(void){
@@ -274,7 +274,7 @@ void ChessMapItem::setFiveChessForm(QWidget *fiveChessForm) {
          int  whiteLoseRecord=0;
          this->fiveChess->recordWin(winType,blackWinRecord,blackLoseRecord,whiteWinRecord,whiteLoseRecord);
 
-         this->fiveChessForm->update();
+         this->fiveChess->updateWidgets();
      }
 
  }

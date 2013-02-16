@@ -7,6 +7,7 @@ FiveChessForm::FiveChessForm(QWidget *parent) :
     fiveChess(FiveChess::getInstance())
 {
     ui->setupUi(this);
+    this->fiveChess->addWidget(this);
     this->chessMapItem=new ChessMapItem();
     this->chessMapItem->setFiveChessForm(this);
     this->scene=new QGraphicsScene(this);
@@ -120,7 +121,7 @@ void FiveChessForm::on_restoreButton_clicked()
 {
     FiveChessElement *fiveChessElement= this->chessMapItem->fiveChess->popCmd();
 
-    this->update();
+
     if(fiveChessElement==NULL){
         return;
     }

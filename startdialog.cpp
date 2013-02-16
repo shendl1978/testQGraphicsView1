@@ -14,6 +14,7 @@ StartDialog::StartDialog(QWidget *parent) :
     ui(new Ui::StartDialog)
 {
     ui->setupUi(this);
+    this->fiveChess->addWidget(this);
     this->setLayout(this->ui->verticalLayout);
 
     this->setWindowTitle("五子棋");

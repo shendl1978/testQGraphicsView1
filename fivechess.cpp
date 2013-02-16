@@ -22,6 +22,7 @@ FiveChess::FiveChess(void):
    ,blackLoseRecord(0)
    ,whiteWinRecord(0)
    ,whiteLoseRecord(0)
+   ,widgets(new QList<QWidget *>())
 {
     for(int i=0;i<CMDS_LENGTH;i++){
 
@@ -87,7 +88,7 @@ bool FiveChess::pushCmd(  FiveChessElement *cmd){
     }else{
         this->cmds[this->currentIndex++]=cmd;
         this->grid[cmd->getX()][cmd->getY()]=cmd->getType();
-
+       this->updateWidgets();
         return true;
     }
 }
@@ -96,6 +97,7 @@ FiveChessElement * FiveChess::popCmd(void){
 
         FiveChessElement * cmd= this->cmds[--this->currentIndex];
         this->grid[cmd->getX()][cmd->getY()]=FiveChessType_None;
+        this->updateWidgets();
         return cmd;
     }else{
         return NULL;
@@ -188,6 +190,18 @@ enum FiveChessEnemyType FiveChess::getEnemyType(void) const{
 void FiveChess::setEnemyType(enum FiveChessEnemyType enemyType){
     this->enemyType=enemyType;
 }
+
+  void FiveChess::updateWidgets(void){
+      for(int i=0;i<this->widgets->size();i++){
+          this->widgets->at(i)->update();
+
+      }
+  }
+  bool FiveChess::addWidget(QWidget *widget){
+
+    this->widgets->append(widget);
+      return true;
+  }
 //TODO：
 enum FiveChessType FiveChess::winner(void){
     enum FiveChessType returnType=FiveChessType_None;

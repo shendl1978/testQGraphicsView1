@@ -26,6 +26,7 @@ public:
     virtual void setScene( QGraphicsScene *scene) ;
     virtual QDialog *getStartDialog(void) const;
     virtual void setStartDialog( QDialog *startDialog) ;
+
 protected:
      virtual void paintEvent(QPaintEvent * event);
 private slots:

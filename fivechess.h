@@ -2,8 +2,8 @@
 #define FIVECHESS_H
 
 #include "fivechesselement.h"
-
-
+#include <QWidget>
+#include <QList>
 class FiveChess
 {
 public:
@@ -11,8 +11,9 @@ public:
     FiveChess( int xSize,int ySize,int elementSize);
 
     virtual ~FiveChess();
+    //TODO:   will use three instance to proxy single game,two player game and online game. They are isolate.
     static FiveChess *getInstance(void);
-    ////Robert will use this method to play chess.
+    ////Robot will use this method to play chess.
     virtual void recommendSteps(enum FiveChessType selfType,FiveChessElement **left,FiveChessElement **right,int &length,int &type);
     virtual enum FiveChessType winner(void);
     virtual bool setChess(int xPos,int yPos,enum FiveChessType type);
@@ -47,6 +48,8 @@ public:
     virtual bool recordWin(enum FiveChessType winType,int &blackWinRecord,int &blackLoseRecord,int &whiteWinRecord,int &whiteLoseRecord);
     virtual enum FiveChessEnemyType getEnemyType(void) const;
     virtual void setEnemyType(enum FiveChessEnemyType enemyType);
+    virtual void updateWidgets(void);
+    virtual bool addWidget(QWidget *widget);
 private:
     static FiveChess *instance;
     int xSize;
@@ -63,7 +66,7 @@ private:
     int blackLoseRecord;
     int whiteWinRecord;
     int whiteLoseRecord;
-
+    QList<QWidget *> *widgets;
 };
 
 #endif // FIVECHESS_H
