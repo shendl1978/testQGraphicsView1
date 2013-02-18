@@ -1,0 +1,57 @@
+body{color:#000000;}
+.fc00{color:#000000;}
+.fc01{color:#FFFFFF;}
+.fc02,.fc02 a{color:#000000;}
+.fc03,.fc03 a,.fc11 a{color:#A90003;}
+.fc04,.fc04 a{color:#CC6465;}
+.fc05{color:#000000;}
+.fc06{color:#666666;}
+.fc07{color:#888888;}
+.fc08{color:#000000;}
+.fc09{color:#000000;}
+.fc10{color:#BDBDBD;}
+.bdc0{border-color:#BDBDBD;}
+.bdc1{border-color:#A1A1A1;}
+.bdc9t{border-top-color:#ffffff;}
+.bdc9r{border-right-color:#ffffff;}
+.bdc9b{border-bottom-color:#ffffff;}
+.bdc9l{border-left-color:#ffffff;}
+.bgc0,.bgc9:hover, .bgc9.js-bgc9-hover{background-color:#E5E4E4;}
+.bgc1{background-color:#ffffff;}
+.bgc2{background-color:#F1EEEE;}
+.bgp0{background-image:url(img/-1.gif);}
+.nb-body{background:#fff url(img/body_bg.jpg) repeat left top;}
+.nb-wrap{background:url(img/banner_bg.jpg) no-repeat center top;}
+.nb-bar{background:#F1EEEE;}
+.nb-top .h{height:254px;}
+.nb-top .t{top:120px;left:562px;font-family:Arial,Helvetica,sans-serif;color:#000000;}
+.nb-top .n{font-size:30;}
+.nb-top .d{font-size:14px;}
+.nb-nav .h{height:48px;line-height:45px;}
+.nb-nav .c{margin:0 60px 0 124px;}
+.nb-nav .w{margin-left:10px;}
+.nb-nav .i{width:98px;font-weight:bold;font-size:16px;}
+.nb-nav .i:hover{font-weight:normal;}
+.nb-nav .selected{background:url(img/nav_on.jpg) no-repeat center top;}
+.nb-nav .selected .i, .nb-nav .selected .i:hover{background:none;}
+.nb-smt{display:block;}
+.nb-smt .h{height:22px;}
+.nb-cnt .wkg{background:#BFBFBF;}
+.nb-cnt .wc{margin:0 0 0 0;}
+.nb-fot .wkg{background:url(img/buttom_bg2.jpg) repeat left top;}
+.nb-fot .h{height:188px;}
+.nb-fot .k{padding-top:100px;}
+.nb-mdl{margin:10px 10px;background:#EAEAEA;}
+.nb-mdl .th{height:37px;line-height:55px;}
+.nb-mdl .bh{height:20px;}
+.nb-mt .tl{width:30px;background:url(img/top_left_pic.jpg) repeat left top;}
+.nb-mt .tc{margin:0 20px 0 30px;font-size:14px;font-weight:bold;background:url(img/top_bg.jpg) repeat left top;}
+.nb-mt .tr{width:20px;background:url(img/top_right_pic.jpg) repeat right top;}
+.nb-mt .tm{right:20px;}
+.nb-mc .cl{width:10px;background:url(img/left_bg.jpg) repeat left top;}
+.nb-mc .cc{margin:0 10px 0 10px;}
+.nb-mc .cr{width:10px;background:url(img/right_bg.jpg) repeat right top;}
+.nb-mb{display:block;}
+.nb-mb .bl{width:20px;background:url(img/buttom_left_pic.jpg) repeat left bottom;}
+.nb-mb .bc{margin:0 20px 0 20px;background:url(img/buttom_bg.jpg) repeat center bottom;}
+.nb-mb .br{width:20px;background:url(img/buttom_right_pic.jpg) repeat right bottom;}
